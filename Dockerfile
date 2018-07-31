@@ -72,9 +72,8 @@ RUN cd caffe-fast-rcnn && \
 
 # download/extract model for sandwich
 WORKDIR /gabriel-object_detection/model
-RUN wget https://owncloud.cmusatyalab.org/owncloud/index.php/s/hC6Azp6hEw1e2u1/download -O sandwich_model.tar.gz
-RUN tar -xvzf sandwich_model.tar.gz
-
+RUN wget https://raw.githubusercontent.com/rbgirshick/py-faster-rcnn/master/models/coco/VGG16/faster_rcnn_end2end/test.prototxt
+RUN wget https://dl.dropboxusercontent.com/s/cotx0y81zvbbhnt/coco_vgg16_faster_rcnn_final.caffemodel
 
 EXPOSE 7070 9098 9111 22222
 CMD ["bash", "-c", "gabriel-control -d -n eth0 -l & sleep 5; gabriel-ucomm -s 127.0.0.1:8021 & sleep 5; cd /gabriel-object_detection && python proxy.py -s 127.0.0.1:8021"]

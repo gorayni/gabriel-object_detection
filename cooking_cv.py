@@ -48,8 +48,8 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 # initialize caffe module
 faster_rcnn_config.TEST.HAS_RPN = True  # Use RPN for proposals
-prototxt = 'model/faster_rcnn_test.pt'
-caffemodel = 'model/model.caffemodel'
+prototxt = 'model/test.prototxt'
+caffemodel = 'model/coco_vgg16_faster_rcnn_final.caffemodel'
 
 if not os.path.isfile(caffemodel):
     raise IOError(('{:s} not found.').format(caffemodel))

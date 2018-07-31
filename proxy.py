@@ -49,21 +49,6 @@ config.setup(is_streaming=True)
 LOG_TAG = "Cooking Proxy: "
 
 
-def reorder_objects(result):
-    # build a mapping between faster-rcnn recognized object order to a standard order
-    object_mapping = [-1] * len(config.LABELS)
-    with open("model/labels.txt") as f:
-        lines = f.readlines()
-        for idx, line in enumerate(lines):
-            line = line.strip()
-            object_mapping[idx] = config.LABELS.index(line)
-
-    for i in xrange(result.shape[0]):
-        result[i, -1] = object_mapping[int(result[i, -1] + 0.1)]
-
-    return result
-
-
 class CookingProxy(gabriel.proxy.CognitiveProcessThread):
     def __init__(self, image_queue, output_queue, engine_id, log_flag=True):
         super(CookingProxy, self).__init__(image_queue, output_queue, engine_id)
@@ -109,7 +94,6 @@ class CookingProxy(gabriel.proxy.CognitiveProcessThread):
 
         # the object detection result format is, for each line: [x1, y1, x2, y2, confidence, cls_idx]
         objects = np.array(json.loads(objects_data))
-        objects = reorder_objects(objects)
 
         img_object = zc.vis_detections(img, objects, config.LABELS)
         result['image'] = b64encode(zc.cv_image2raw(img_object))
