@@ -1,25 +1,9 @@
 FROM cmusatyalab/gabriel
-MAINTAINER Satyalab, satya-group@lists.andrew.cmu.edu
 
 WORKDIR /
-RUN git clone https://github.com/gorayni/gabriel-sandwich.git
+RUN git clone https://github.com/gorayni/gabriel-object_detector.git
 
 ENV FASTER_RCNN_ROOT /py-faster-rcnn
-
-#WORKDIR /
-#RUN git clone https://github.com/rbgirshick/py-faster-rcnn
-#RUN pip install easydict
-#
-#WORKDIR /
-#RUN git clone https://github.com/rbgirshick/caffe-fast-rcnn.git
-#
-#WORKDIR /caffe-fast-rcnn
-#RUN git checkout -b 0dcd397b29507b8314e252e850518c5695efbb83
-#RUN cp -r /caffe-fast-rcnn/python /py-faster-rcnn
-
-# install py-faster-rcnn without cudnn
-#############################################
-# install py-faster-rcnn dependency
 
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -87,10 +71,10 @@ RUN cd caffe-fast-rcnn && \
     make -j$(nproc) pycaffe
 
 # download/extract model for sandwich
-WORKDIR /gabriel-sandwich/model
+WORKDIR /gabriel-object_detector/model
 RUN wget https://owncloud.cmusatyalab.org/owncloud/index.php/s/hC6Azp6hEw1e2u1/download -O sandwich_model.tar.gz
 RUN tar -xvzf sandwich_model.tar.gz
 
 
 EXPOSE 7070 9098 9111 22222
-CMD ["bash", "-c", "gabriel-control -d -n eth0 -l & sleep 5; gabriel-ucomm -s 127.0.0.1:8021 & sleep 5; cd /gabriel-sandwich && python proxy.py -s 127.0.0.1:8021"]
+CMD ["bash", "-c", "gabriel-control -d -n eth0 -l & sleep 5; gabriel-ucomm -s 127.0.0.1:8021 & sleep 5; cd /gabriel-object_detector && python proxy.py -s 127.0.0.1:8021"]

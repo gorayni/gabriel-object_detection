@@ -26,11 +26,6 @@ IS_STREAMING = True
 # Pure state detection or generate feedback as well
 RECOGNIZE_ONLY = False
 
-# Port for communication between proxy and task server
-# TASK_SERVER_IP = "128.2.213.185"
-TASK_SERVER_IP = "128.2.211.75"
-TASK_SERVER_PORT = 5511
-
 # Configs for object detection
 USE_GPU = False
 
@@ -46,10 +41,8 @@ IMAGE_MAX_WH = 640
 # Display
 DISPLAY_MAX_PIXEL = 400
 DISPLAY_SCALE = 1
-DISPLAY_LIST_ALL = ['input', 'object']
 DISPLAY_LIST_TEST = ['input', 'object']
 DISPLAY_LIST_STREAM = []
-# DISPLAY_LIST_TASK = ['input', 'object', 'holo', 'img_guidance', 'text_guidance']
 DISPLAY_LIST_TASK = []
 
 # Used for cvWaitKey
@@ -58,23 +51,15 @@ DISPLAY_WAIT_TIME = 1 if IS_STREAMING else 500
 # The objects(states) which can be detected
 LABELS = ["bread", "ham", "cucumber", "lettuce", "cheese", "half", "hamwrong", "tomato", "full"]
 
-# The parameters for locating the hologram feedback
-holo_pos_paras = {'ham': [6500, 0.5, 0.36],
-                  'lettuce': [6800, 0.5, 0.32],
-                  'bread': [7100, 0.5, 0.3],
-                  'tomato': [7500, 0.5, 0.26],
-                  'breadtop': [7800, 0.5, 0.22]}
-
 
 def setup(is_streaming):
     global IS_STREAMING, DISPLAY_LIST, DISPLAY_WAIT_TIME, SAVE_IMAGE
     IS_STREAMING = is_streaming
     if not IS_STREAMING:
         DISPLAY_LIST = DISPLAY_LIST_TEST
+    elif RECOGNIZE_ONLY:
+        DISPLAY_LIST = DISPLAY_LIST_STREAM
     else:
-        if RECOGNIZE_ONLY:
-            DISPLAY_LIST = DISPLAY_LIST_STREAM
-        else:
-            DISPLAY_LIST = DISPLAY_LIST_TASK
+        DISPLAY_LIST = DISPLAY_LIST_TASK
     DISPLAY_WAIT_TIME = 1 if IS_STREAMING else 500
     SAVE_IMAGE = not IS_STREAMING
