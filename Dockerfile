@@ -1,7 +1,7 @@
 FROM cmusatyalab/gabriel
 
 WORKDIR /
-RUN git clone https://github.com/gorayni/gabriel-object_detector.git
+RUN git clone https://github.com/gorayni/gabriel-object_detection.git
 
 ENV FASTER_RCNN_ROOT /py-faster-rcnn
 
