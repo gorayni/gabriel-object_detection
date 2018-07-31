@@ -71,10 +71,10 @@ RUN cd caffe-fast-rcnn && \
     make -j$(nproc) pycaffe
 
 # download/extract model for sandwich
-WORKDIR /gabriel-object_detector/model
+WORKDIR /gabriel-object_detection/model
 RUN wget https://owncloud.cmusatyalab.org/owncloud/index.php/s/hC6Azp6hEw1e2u1/download -O sandwich_model.tar.gz
 RUN tar -xvzf sandwich_model.tar.gz
 
 
 EXPOSE 7070 9098 9111 22222
-CMD ["bash", "-c", "gabriel-control -d -n eth0 -l & sleep 5; gabriel-ucomm -s 127.0.0.1:8021 & sleep 5; cd /gabriel-object_detector && python proxy.py -s 127.0.0.1:8021"]
+CMD ["bash", "-c", "gabriel-control -d -n eth0 -l & sleep 5; gabriel-ucomm -s 127.0.0.1:8021 & sleep 5; cd /gabriel-object_detection && python proxy.py -s 127.0.0.1:8021"]
