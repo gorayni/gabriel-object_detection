@@ -1,0 +1,9 @@
+images*
+image_list.xml
+image_test_list.xml
+image_metadata_stylesheet.xsl
+train.txt
+test.txt
+*.svm
+separate_xmls/
+separate_xmls_test/

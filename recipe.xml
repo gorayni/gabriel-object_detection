@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<task>
+<name>cooking demo</name>
+<comment>Making toy sandwich.</comment>
+<instructions>
+  <instruction state='nothing'>
+    <speech>
+        Now put a piece of bread on the table.
+    </speech>
+    <image path='images_feedback/bread.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='bread'>
+    <speech>
+        Now put a piece of ham on the bread.
+    </speech>
+    <image path='images_feedback/ham.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='ham'>
+    <speech>
+        Now put a piece of lettuce on the ham.
+    </speech>
+    <image path='images_feedback/lettuce.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='lettuce'>
+    <speech>
+        Now put a piece of bread on the lettuce.
+    </speech>
+    <image path='images_feedback/half.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='cucumber'>
+    <speech>
+        This sandwich doesn't contain any cucumber. Replace the cucumber with lettuce.
+    </speech>
+    <image path='images_feedback/lettuce.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='cheese'>
+    <speech>
+        This sandwich doesn't contain any cheese. Remove the chese and put a slice of bread on top.
+    </speech>
+    <image path='images_feedback/half.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='half'>
+    <speech>
+        You are half done. Now put a piece of tomato on the bread.
+    </speech>
+    <image path='images_feedback/tomato.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='hamwrong'>
+    <speech>
+        That's too much meat. Replace the ham with tomatoes.
+    </speech>
+    <image path='images_feedback/tomato.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='tomato'>
+    <speech>
+        Now put the bread on top and you will be done.
+    </speech>
+    <image path='images_feedback/full.jpeg'>
+    </image>
+  </instruction>
+  <instruction state='full'>
+    <speech>
+        Congratulations! You have made a sandwich!
+    </speech>
+    <image path=''>
+    </image>
+  </instruction>
+</instructions>
+</task>
